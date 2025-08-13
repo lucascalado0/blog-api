@@ -30,7 +30,7 @@ public class Artigo {
     private LocalDateTime dataPublicacao;
 
     @Column(nullable = false)
-    @NotNull
+    @NotBlank
     private String autor;
 
     DateTimeFormatter horaFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
