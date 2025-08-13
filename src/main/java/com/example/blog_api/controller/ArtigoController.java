@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-@Controller
-@RestController("/artigos")
+
+@RestController
+@RequestMapping("/artigos")
 public class ArtigoController {
     @Autowired
     private ArtigoService artigoService;
