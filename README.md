@@ -49,7 +49,7 @@ A API oferece os seguintes endpoints:
 
 ### Clonar o repositório
   bash
-- git clone https://github.com/seu-usuario/blog-pessoal-api.git
+- git clone https://github.com/seu-usuario/blog-api.git
 - cd blog-pessoal-api
 
 ## Banco de dados H2 e JPA
