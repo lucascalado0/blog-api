@@ -2,15 +2,18 @@ package com.example.blog_api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 
-
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "artigo")
 @Table(name = "artigos")
 public class Artigo {
@@ -27,30 +30,25 @@ public class Artigo {
     @NotBlank
     private String conteudo;
 
-    @Column(nullable = false)
+    @Column(name = "data_publicacao")
     private LocalDateTime dataPublicacao;
 
-    @Column
+    @Column(name = "data_atualizacao")
     private LocalDateTime dataAtualizacao;
 
     @Column(nullable = false)
     @NotBlank
     private String autor;
 
-    public Artigo(String titulo, String conteudo, LocalDateTime dataPublicacao, String autor) {
-        this.titulo = titulo;
-        this.conteudo = conteudo;
-        this.dataPublicacao = dataPublicacao;
-        this.autor = autor;
-    }
-
     @Override
     public String toString() {
-        return "Artigo {" +
-                "Titulo = '" + titulo + '\'' +
-                ",\nConteudo = '" + conteudo + '\'' +
-                ",\nData de Publicação = " + dataPublicacao +
-                ",\nAutor = '" + autor + '\'' +
+        return "Artigo{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", conteudo='" + conteudo + '\'' +
+                ", dataPublicacao=" + dataPublicacao +
+                ", dataAtualizacao=" + dataAtualizacao +
+                ", autor='" + autor + '\'' +
                 '}';
     }
 }
