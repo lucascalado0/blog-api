@@ -5,7 +5,6 @@ import com.example.blog_api.service.ArtigoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,10 +26,10 @@ public class ArtigoController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Artigo> buscarArtigoPorId(@PathVariable Long id){
-        return artigoService.buscarArtigoPorId(id)
-                .map(artigo -> ResponseEntity.ok(artigo))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Optional<Artigo>> buscarArtigoPorId(@PathVariable Long id) {
+        Optional<Artigo> artigo = artigoService.buscarArtigoPorId(id);
+
+        return ResponseEntity.ok(artigo);
     }
 
     @GetMapping
@@ -40,12 +39,11 @@ public class ArtigoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Artigo> atualizarArtigo(@PathVariable Long id, @Valid @RequestBody Artigo artigo) {
-        Optional<Artigo> artigoExistente = artigoService.buscarArtigoPorId(id);
+    public ResponseEntity<Artigo> atualizarArtigo(@PathVariable Long id, @Valid @RequestBody Artigo artigoExistente) {
+        Optional<Artigo> novoArtigo = artigoService.buscarArtigoPorId(id);
 
-        if (artigoExistente.isPresent()) {
-            artigo.setId(id);
-            Artigo artigoAtualizado = artigoService.novoArtigo(artigo);
+        if (novoArtigo.isPresent()) {
+            Artigo artigoAtualizado = artigoService.atualizarArtigo(artigoExistente, id).get();
             return ResponseEntity.ok(artigoAtualizado);
         } else {
             return ResponseEntity.notFound().build();
